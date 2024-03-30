@@ -9,12 +9,14 @@ import Foundation
 
 final class CountryListViewModel: ObservableObject {
     
-    public var countries: [Country] = []
-    @Published public var filteredCountries: [Country] = []
+    public var countries: [Country] = Country.mockData
+    @Published public var filteredCountries: [Country] = Country.mockData
     public let countryJsonFileName: String = "countries"
+    @Published var searchText: String = ""
+    
     
     init() {
-        loadCountryJSON()
+        //loadCountryJSON()
     }
     
     public func getCounytryJSONFilePath() -> String? {
@@ -48,5 +50,12 @@ final class CountryListViewModel: ObservableObject {
         return ""
     }
 
+    public func performSearch(for searchText: String) {
+        if searchText.isEmpty {
+            filteredCountries = countries
+        } else {
+            filteredCountries = countries.filter { $0.name.localizedCaseInsensitiveContains(searchText) }
+        }
+    }
 
 }
