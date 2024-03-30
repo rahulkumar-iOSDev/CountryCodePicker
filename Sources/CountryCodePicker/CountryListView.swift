@@ -31,7 +31,7 @@ public struct CountryListView: View {
                             .foregroundStyle(.gray)
                         
                         Text("No Countries Found")
-                            .font(.title3)
+                            .font(.system(size: 14))
                             .fontWeight(.regular)
                             .foregroundStyle(.gray)
                     }
@@ -50,7 +50,7 @@ public struct CountryListView: View {
                 }
             }
             .searchable(text: $viewModel.searchText, placement: .navigationBarDrawer(displayMode: .always))
-            .onChange(of: viewModel.searchText) { _ in
+            .onChange(of: viewModel.searchText, initial: false) { _, _ in
                 viewModel.performSearch(for: viewModel.searchText)
             }
             .navigationTitle("Select Country")
