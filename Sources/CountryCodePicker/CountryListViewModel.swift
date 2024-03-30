@@ -9,15 +9,15 @@ import Foundation
 
 final class CountryListViewModel: ObservableObject {
     
-    var countries: [Country] = []
-    @Published var filteredCountries: [Country] = []
-    let countryJsonFileName: String = "countries"
+    public var countries: [Country] = []
+    @Published public var filteredCountries: [Country] = []
+    public let countryJsonFileName: String = "countries"
     
     init() {
         loadCountryJSON()
     }
     
-    func getCounytryJSONFilePath() -> String? {
+    public func getCounytryJSONFilePath() -> String? {
         guard let path = Bundle.main.path(forResource: countryJsonFileName, ofType: "json") else {
             print("countries.json file is missing")
             return nil
@@ -25,7 +25,7 @@ final class CountryListViewModel: ObservableObject {
         return path
     }
     
-    func loadCountryJSON() {
+    public func loadCountryJSON() {
         guard let path = getCounytryJSONFilePath() else { return }
 
         do {
@@ -38,7 +38,7 @@ final class CountryListViewModel: ObservableObject {
         }
     }
     
-    func getCountryFlag(from countryCode: String) -> String {
+    public func getCountryFlag(from countryCode: String) -> String {
         let countryCodeWithoutPlus = countryCode.contains("+") ? String(countryCode.dropFirst()) : countryCode
         for country in countries {
             if country.dialCode.description == countryCodeWithoutPlus {

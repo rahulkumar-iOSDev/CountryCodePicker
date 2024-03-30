@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct Country: Decodable, Identifiable {
-    var id = UUID()
-    let name: String
-    let dialCode: Int
-    let code, flag: String
+public struct Country: Decodable, Identifiable {
+    public var id = UUID()
+    public let name: String
+    public let dialCode: Int
+    public let code, flag: String
 }

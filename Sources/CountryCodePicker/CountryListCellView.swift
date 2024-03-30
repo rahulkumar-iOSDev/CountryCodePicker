@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-struct CountryListCellView: View {
+public struct CountryListCellView: View {
     
     let country: Country
     
-    var body: some View {
+    public var body: some View {
         HStack {
             Text(country.flag)
             Text(country.name)
