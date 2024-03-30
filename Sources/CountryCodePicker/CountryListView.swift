@@ -8,7 +8,7 @@
 import SwiftUI
 
 public struct CountryListView: View {
-    @StateObject private var viewModel = CountryListViewModel()
+    @StateObject var viewModel = CountryListViewModel()
     
     public var body: some View {
         List(viewModel.filteredCountries) { country in
