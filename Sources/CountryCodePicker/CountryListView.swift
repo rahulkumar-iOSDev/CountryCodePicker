@@ -8,6 +8,11 @@
 import SwiftUI
 
 public struct CountryListView: View {
+    
+    public init() {
+        
+    }
+    
     @StateObject var viewModel = CountryListViewModel()
     
     public var body: some View {
