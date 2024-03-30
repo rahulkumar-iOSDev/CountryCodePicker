@@ -9,15 +9,10 @@ import Foundation
 
 final class CountryListViewModel: ObservableObject {
     
-    public var countries: [Country] = Country.mockData
-    @Published public var filteredCountries: [Country] = Country.mockData
+    public var countries: [Country] = []
+    @Published public var filteredCountries: [Country] = []
     public let countryJsonFileName: String = "countries"
     @Published var searchText: String = ""
-    
-    
-    init() {
-        //loadCountryJSON()
-    }
     
     public func getCounytryJSONFilePath() -> String? {
         guard let path = Bundle.main.path(forResource: countryJsonFileName, ofType: "json") else {
@@ -26,6 +21,7 @@ final class CountryListViewModel: ObservableObject {
         }
         return path
     }
+    
     
     public func loadCountryJSON() {
         guard let path = getCounytryJSONFilePath() else { return }
