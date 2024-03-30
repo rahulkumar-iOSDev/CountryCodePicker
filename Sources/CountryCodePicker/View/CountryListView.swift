@@ -63,9 +63,6 @@ public struct CountryListView: View {
                         .fontWeight(.regular)
                 }
             }
-            .onAppear {
-                viewModel.loadCountryJSON()
-            }
         }
     }
 }
