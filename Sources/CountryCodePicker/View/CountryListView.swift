@@ -12,17 +12,14 @@ public struct CountryListView: View {
     @Binding public var isCountryListPresnted: Bool
     @StateObject private var viewModel = CountryListViewModel()
     public var onTapOfCountryRow: ((Country) -> Void)
-    public var testingClosure: ((Int) -> Bool)
     
-    public init(isCountryListPresnted: Binding<Bool>, onTapOfCountryRow: @escaping ((Country) -> Void), testingClosure: @escaping ((Int) -> Bool)) {
+    public init(isCountryListPresnted: Binding<Bool>, onTapOfCountryRow: @escaping ((Country) -> Void)) {
         _isCountryListPresnted = isCountryListPresnted
         self.onTapOfCountryRow = onTapOfCountryRow
-        self.testingClosure = testingClosure
         
     }
     
     public var body: some View {
-        
         NavigationStack {
             VStack {
                 if viewModel.filteredCountries.isEmpty {
@@ -44,7 +41,6 @@ public struct CountryListView: View {
                             .frame(height: 28)
                             .listRowSeparator(.hidden)
                             .onTapGesture {
-                                print(testingClosure(6))
                                 onTapOfCountryRow(country)
                                 isCountryListPresnted = false
                                 
@@ -72,8 +68,6 @@ public struct CountryListView: View {
 }
 
 #Preview {
-    CountryListView(isCountryListPresnted: .constant(false), onTapOfCountryRow: { _ in }, testingClosure: { _ in
-        return false
-    })
+    CountryListView(isCountryListPresnted: .constant(false), onTapOfCountryRow: { _ in })
 }
 
