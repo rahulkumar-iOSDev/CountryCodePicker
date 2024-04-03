@@ -38,6 +38,7 @@ public struct CountryListView: View {
                 } else {
                     List(viewModel.filteredCountries) { country in
                         CountryListCellView(country: country)
+                            .contentShape(Rectangle())
                             .frame(height: 28)
                             .listRowSeparator(.hidden)
                             .onTapGesture {
