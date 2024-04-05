@@ -9,14 +9,12 @@ import SwiftUI
 
 public struct CountryListView: View {
 
-    @Binding public var isCountryListPresnted: Bool
+    @Environment(\.presentationMode) var presentationMode
     @StateObject private var viewModel = CountryListViewModel()
     public var onTapOfCountryRow: ((Country) -> Void)
     
-    public init(isCountryListPresnted: Binding<Bool>, onTapOfCountryRow: @escaping ((Country) -> Void)) {
-        _isCountryListPresnted = isCountryListPresnted
+    public init(onTapOfCountryRow: @escaping ((Country) -> Void)) {
         self.onTapOfCountryRow = onTapOfCountryRow
-        
     }
     
     public var body: some View {
@@ -43,7 +41,7 @@ public struct CountryListView: View {
                             .listRowSeparator(.hidden)
                             .onTapGesture {
                                 onTapOfCountryRow(country)
-                                isCountryListPresnted = false
+                                presentationMode.wrappedValue.dismiss()
                                 
                             }
                     }
@@ -58,7 +56,7 @@ public struct CountryListView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 Button {
-                    isCountryListPresnted = false
+                    presentationMode.wrappedValue.dismiss()
                 } label: {
                     Text("Close")
                         .fontWeight(.regular)
@@ -69,6 +67,6 @@ public struct CountryListView: View {
 }
 
 #Preview {
-    CountryListView(isCountryListPresnted: .constant(false), onTapOfCountryRow: { _ in })
+    CountryListView(onTapOfCountryRow: { _ in })
 }
 
