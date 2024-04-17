@@ -16,7 +16,7 @@ struct ContentView: View {
         Button {
             isCountryListPresnted = true
         } label: {
-            Text("Show Country code Picker")
+            Text("Show Country Picker")
         }
         
         .fullScreenCover(isPresented: $isCountryListPresnted, content: {
