@@ -49,7 +49,7 @@ public struct CountryListView: View {
                 }
             }
             .searchable(text: $viewModel.searchText, placement: .navigationBarDrawer(displayMode: .always))
-            .onChange(of: viewModel.searchText, initial: false) { _, _ in
+            .onChange(of: viewModel.searchText) { _ in
                 viewModel.performSearch(for: viewModel.searchText)
             }
             .navigationTitle("Select Country")
