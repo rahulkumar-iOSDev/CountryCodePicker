@@ -12,14 +12,11 @@ public struct CountryListCellView: View {
     let country: Country
     
     public var body: some View {
-        VStack {
-            HStack {
-                Text(country.flag)
-                Text(country.name)
-                Spacer()
-                Text("+\(country.dialCode)")
-            }
-            Divider()
+        HStack {
+            Text(country.flag)
+            Text(country.name)
+            Spacer()
+            Text("+\(country.dialCode)")
         }
     }
 }
