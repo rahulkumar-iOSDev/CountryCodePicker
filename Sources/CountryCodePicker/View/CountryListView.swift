@@ -9,14 +9,12 @@ import SwiftUI
 
 public struct CountryListView: View {
 
-    @Binding public var isCountryListPresnted: Bool
+    @Environment(\.presentationMode) var presentationMode
     @StateObject private var viewModel = CountryListViewModel()
     public var onTapOfCountryRow: ((Country) -> Void)
     
-    public init(isCountryListPresnted: Binding<Bool>, onTapOfCountryRow: @escaping ((Country) -> Void)) {
-        _isCountryListPresnted = isCountryListPresnted
+    public init(onTapOfCountryRow: @escaping ((Country) -> Void)) {
         self.onTapOfCountryRow = onTapOfCountryRow
-        
     }
     
     public var body: some View {
@@ -30,19 +28,29 @@ public struct CountryListView: View {
                             .frame(width: 80, height: 80)
                             .foregroundStyle(.gray)
                         
-                        Text("No Countries Found")
-                            .font(.system(size: 14))
-                            .fontWeight(.regular)
-                            .foregroundStyle(.gray)
-                    }
+                        VStack(spacing: 4) {
+                            Text("No Results for \"\(viewModel.searchText)\"")
+                                .font(.system(size: 18))
+                                .multilineTextAlignment(.center)
+                                .fontWeight(.medium)
+                                .foregroundStyle(.gray)
+                            
+                            Text("Check the spelling or try a new search.")
+                                .font(.system(size: 14))
+                                .fontWeight(.regular)
+                                .foregroundStyle(.gray)
+                        }
+                        
+                    }.padding(.horizontal)
                 } else {
                     List(viewModel.filteredCountries) { country in
                         CountryListCellView(country: country)
+                            .listRowSeparator(viewModel.filteredCountries.first == country ? .hidden : .visible, edges: .top)
+                            .contentShape(Rectangle())
                             .frame(height: 28)
-                            .listRowSeparator(.hidden)
                             .onTapGesture {
                                 onTapOfCountryRow(country)
-                                isCountryListPresnted = false
+                                presentationMode.wrappedValue.dismiss()
                                 
                             }
                     }
@@ -57,9 +65,9 @@ public struct CountryListView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 Button {
-                    isCountryListPresnted = false
+                    presentationMode.wrappedValue.dismiss()
                 } label: {
-                    Text("Close")
+                    Text("Cancel")
                         .fontWeight(.regular)
                 }
             }
@@ -68,6 +76,6 @@ public struct CountryListView: View {
 }
 
 #Preview {
-    CountryListView(isCountryListPresnted: .constant(false), onTapOfCountryRow: { _ in })
+    CountryListView(onTapOfCountryRow: { _ in })
 }
 

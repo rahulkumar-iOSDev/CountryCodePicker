@@ -9,18 +9,18 @@ import SwiftUI
 import CountryCodePicker
 
 struct ContentView: View {
-    
+
     @State var isCountryListPresnted: Bool = false
     var body: some View {
 
         Button {
             isCountryListPresnted = true
         } label: {
-            Text("Show Country Picker")
+            Text("Show Country code Picker")
         }
         
         .fullScreenCover(isPresented: $isCountryListPresnted, content: {
-            CountryListView(isCountryListPresnted: $isCountryListPresnted) { country in
+            CountryListView { country in
                 print(country)
             }
         })

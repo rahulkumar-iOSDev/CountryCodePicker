@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Country: Decodable, Identifiable {
+public struct Country: Decodable, Identifiable, Equatable {
     public var id = UUID()
     public let name: String
     public let dialCode: Int
